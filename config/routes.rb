@@ -3,7 +3,7 @@ TwofourhellVolReg::Application.routes.draw do
   post "signup/create"
 
   #testing
-  get "faker" => 'signup#faker'
+  get "faker/:id" => 'signup#faker'
 
   resources :volunteers
 

@@ -18,7 +18,8 @@ ActiveRecord::Schema.define(version: 20130514031138) do
   enable_extension "hstore"
   enable_extension "uuid-ossp"
 
-  create_table "profiles", force: true do |t|
+  create_table "profiles", id: false, force: true do |t|
+    t.uuid     "id",            null: false
     t.string   "name"
     t.string   "email"
     t.string   "mobile"

@@ -17,7 +17,7 @@ class SignupController < ApplicationController
   end
 
   def faker
-    profile = Profile.find(1)
+    profile = Profile.find(params[:id])
     session[:profile_id] = profile.id
     render text: 'done', layout: false
   end

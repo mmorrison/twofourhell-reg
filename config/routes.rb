@@ -1,6 +1,12 @@
 TwofourhellVolReg::Application.routes.draw do
   get "signup/new"
   post "signup/create"
+
+  #testing
+  get "faker" => 'signup#faker'
+
+  resources :volunteers
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

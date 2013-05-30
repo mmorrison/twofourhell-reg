@@ -11,10 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130415032234) do
+ActiveRecord::Schema.define(version: 20130514031138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
+  enable_extension "uuid-ossp"
 
   create_table "profiles", force: true do |t|
     t.string   "name"
@@ -25,6 +27,38 @@ ActiveRecord::Schema.define(version: 20130415032234) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "age_group"
+    t.string   "status"
+    t.string   "confirm_token"
+  end
+
+  create_table "teams", id: false, force: true do |t|
+    t.uuid     "id",         null: false
+    t.string   "name"
+    t.boolean  "special"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "vol_applications", id: false, force: true do |t|
+    t.uuid    "id",                  null: false
+    t.integer "year"
+    t.hstore  "preferred_teams"
+    t.hstore  "preferred_teammates"
+    t.hstore  "event_availability"
+    t.integer "team_id"
+    t.uuid    "volunteer_id"
+  end
+
+  create_table "volunteers", id: false, force: true do |t|
+    t.uuid    "id",                                null: false
+    t.integer "profile_id"
+    t.hstore  "certifications"
+    t.hstore  "equipment"
+    t.hstore  "years_volunteered"
+    t.text    "qualification"
+    t.text    "internal_notes"
+    t.boolean "starred?",          default: false
+    t.string  "status"
   end
 
 end

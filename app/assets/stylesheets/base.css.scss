@@ -1,8 +1,26 @@
 html {
- 	background: image-url("24HHH1.jpg") no-repeat center center fixed;
- 	background-size: cover;
+ 	#background: image-url("24HHH1.jpg") no-repeat center center fixed;
+ 	#background-size: cover;
+}
+
+textarea {
+  height: auto !important;
 }
 
 .error_panel {
-	
+
+}
+
+.header {
+  text-align: center;
+  background-color: #697069;
+  height: 302px;
+}
+
+.vol-welcome {
+  padding-top: 15px;
+}
+
+.inputs {
+  padding-top: 20px;
 }

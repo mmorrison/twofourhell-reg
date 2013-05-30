@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="small-11 small-centered columns vol-welcome ">
+    <p>Hey, <%= @profile.name %>!</p>
+    <p>We're excited that you want to volunteer for 24hell this year!.
+      We just need a couple more pieces of information from you, and you'll be all set.</p>
+    <p>Just complete the form below, and hit apply. That's it!</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-11 small-centered columns">
+    <%= form_for @volunteer, url: {action: "create"} do |f| %>
+      <div class="row">
+        <div class="large-4 columns">
+          <label>Certifications</label>
+          <%= f.select(:certifications, [["CPR"], ["First-Aid"], ["Outdoor Rescue"], ["Wilderness First Responder"]], {}, {multiple: 'true', size: 4}) %>
+        </div>
+      </div>
+
+      <div class="row inputs">
+        <div class="large-4 columns">
+          <label>Year(s) Volunteered</label>
+          <%= f.select(:years_volunteered, [["First Time"],["2007"], ["2008"], ["2009"], ["2010"], ["2011"], ["2012"]], {}, {multiple: 'true', size: 7}) %>
+        </div>
+      </div>
+
+      <div class="row inputs">
+        <div class="large-10 columns">
+          <label>What Qualifies You To Be a Volunteer?</label>
+          <%= f.text_area(:qualification, size: '80x10') %>
+        </div>
+      </div>
+
+      <%= fields_for @volunteer_app do |va| %>
+      <div class="row">
+        <div class="small-5 columns">
+          <label>Any preferred teammates?</label>
+          <%= va.text_field(:preferred_teammates, placeholder: "John Crux, Jane Clean") %>
+        </div>
+      </div>
+
+      <div class="row inputs">
+        <div class="small-6 columns">
+          <label>Which Events Are You Available For?</label>
+          <%= va.select(:event_availability, [["Setup"], ["12hr Competition"], ["24hr Competition"], ["Tardown"]], {}, {multiple: 'true', size: 4}) %>
+        </div>
+      </div>
+
+      <div class="row inputs">
+        <div class="small-5 columns">
+          <label>Which Areas Would You Like To Volunteer For?</label>
+          <%= va.select(:preferred_teams, [["Crag Team"], ["Registrations"], ["Scoring"], ["Logistics"], ["Medical"]]) %>
+        </div>
+      </div>
+      <% end %>
+
+      <div class="row inputs">
+        <div class="small-4 columns">
+          <%= f.submit "Apply for #{DateTime.now.year}!", :class => "button" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -22,10 +22,18 @@
 
   <body>
     <div class="container">
+      <% flash.each do |name, msg| %>
+        <% if msg.is_a?(String) %>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        <% end %>
+      <% end %>
+
+      <div class="header"><%= image_tag "24HHH_13_900x300day-filtered.png" %></div>
+
       <%= yield %>
     </div>
 
-    
+
     <%= javascript_include_tag "application" %>
   </body>
 </html>

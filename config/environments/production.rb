@@ -78,10 +78,11 @@ TwofourhellVolReg::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.smtp_settings = {
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
     :address => "smtp.mandrillapp.com",
     :port => 587,
-    :username => ENV['MANDRILL_USERNAME'],
+    :user_name => ENV['MANDRILL_USERNAME'],
     :password => ENV['ad0kw9vJdJUY216JZhLMMQ']
   }
 end

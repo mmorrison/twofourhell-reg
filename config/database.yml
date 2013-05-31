@@ -48,6 +48,8 @@ test:
   encoding: unicode
   database: twofourhell-vol-reg_test
   pool: 5
+  host: localhost
+  port: 15432
 
 production:
   adapter: postgresql

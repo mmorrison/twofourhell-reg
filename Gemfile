@@ -32,6 +32,11 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+end
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 #gem 'jbuilder', '~> 1.0.1'
 

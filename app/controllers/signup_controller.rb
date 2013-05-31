@@ -9,7 +9,6 @@ class SignupController < ApplicationController
 
   	if @profile.save
       session[:profile_id] = @profile.id
-      flash[:notice] = "You're profile was created successfully. Please check your email."
       redirect_to profile_complete_path
   	else
   		render "new"
@@ -26,12 +25,12 @@ class SignupController < ApplicationController
   end
 
   def confirm
-    @profile = Profile.where('confirm_token = ?', params[:ct])
+    @profile = Profile.where('confirm_token = ?', params[:ct]).first
 
     if @profile.present?
       session[:profile_id] = @profile.id
-      flash[:success] = "Great! You're email address has been confirmed!"
-      redirect_to volunteer_signup_path
+      flash[:notice] = "Great! Your email address has been confirmed!"
+      redirect_to new_volunteer_path
     else
       render file: 'public/404.html', status: 404, layout: false
     end

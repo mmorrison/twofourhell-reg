@@ -18,7 +18,8 @@ ActiveRecord::Schema.define(version: 20130514031138) do
   enable_extension "hstore"
   enable_extension "uuid-ossp"
 
-  create_table "profiles", force: true do |t|
+  create_table "profiles", id: false, force: true do |t|
+    t.uuid     "id",            null: false
     t.string   "name"
     t.string   "email"
     t.string   "mobile"
@@ -40,25 +41,29 @@ ActiveRecord::Schema.define(version: 20130514031138) do
   end
 
   create_table "vol_applications", id: false, force: true do |t|
-    t.uuid    "id",                  null: false
-    t.integer "year"
-    t.hstore  "preferred_teams"
-    t.hstore  "preferred_teammates"
-    t.hstore  "event_availability"
-    t.integer "team_id"
-    t.uuid    "volunteer_id"
+    t.uuid     "id",                               null: false
+    t.integer  "year"
+    t.string   "preferred_teams",     default: [],              array: true
+    t.string   "preferred_teammates",                           array: true
+    t.string   "event_availability",  default: [],              array: true
+    t.integer  "team_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.uuid     "volunteer_id"
   end
 
   create_table "volunteers", id: false, force: true do |t|
-    t.uuid    "id",                                null: false
-    t.integer "profile_id"
-    t.hstore  "certifications"
-    t.hstore  "equipment"
-    t.hstore  "years_volunteered"
-    t.text    "qualification"
-    t.text    "internal_notes"
-    t.boolean "starred?",          default: false
-    t.string  "status"
+    t.uuid     "id",                                null: false
+    t.uuid     "profile_id"
+    t.string   "certifications",    default: [],                 array: true
+    t.string   "equipment",         default: [],                 array: true
+    t.string   "years_volunteered", default: [],                 array: true
+    t.text     "qualification"
+    t.text     "internal_notes"
+    t.boolean  "starred?",          default: false
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

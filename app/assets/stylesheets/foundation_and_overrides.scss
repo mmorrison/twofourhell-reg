@@ -362,7 +362,7 @@ $body-bg: none;
 // $alert-border-style: solid;
 // $alert-border-width: 1px;
 // $alert-border-color: darken($primary-color, $alert-function-factor);
-// $alert-bottom-margin: emCalc(20px);
+$alert-bottom-margin: 0;
 
 // We use these to style the close buttons
 // $alert-close-color: #333;

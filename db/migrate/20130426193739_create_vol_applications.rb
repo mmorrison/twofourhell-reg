@@ -3,10 +3,11 @@ class CreateVolApplications < ActiveRecord::Migration
     create_table :vol_applications, :id => false do |t|
       t.uuid :id, :primary_key => true, :default => "uuid_generate_v4()"
       t.integer :year
-      t.hstore :preferred_teams
-      t.hstore :preferred_teammates
-      t.hstore :event_availability
+      t.string :preferred_teams, :array => true, :default => "{}"
+      t.string :preferred_teammates, :array => true
+      t.string :event_availability, :array => true, :default => "{}"
       t.references :team
+      t.timestamps
     end
   end
 end

@@ -1,9 +1,15 @@
 TwofourhellVolReg::Application.routes.draw do
   get "signup/new"
   post "signup/create"
+  get "signup/complete", as: "profile_complete"
+
+  get "confirm/:ct" => 'signup#confirm'
 
   #testing
   get "faker" => 'signup#faker'
+
+  get "volunteers/thankyou", as: 'thankyou'
+
 
   resources :volunteers
 

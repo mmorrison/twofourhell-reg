@@ -1,28 +1,102 @@
 <div class="row">
   <div class="small-11 small-centered columns vol-welcome ">
     <p>Hey, <%= @profile.name %>!</p>
-    <p>We're excited that you want to volunteer for 24hell this year!.
-      We just need a couple more pieces of information from you, and you'll be all set.</p>
-    <p>Just complete the form below, and hit apply. That's it!</p>
+    <p>Thanks for confirming your email address. We're excited that you want to apply to be a volunteer for 24HHH this year! We just need a couple more pieces of information from you, so we can complete your application. Just fill in the blanks and check the boxes below, and hit apply. That's it!</p>
   </div>
 </div>
 
 <div class="row">
   <div class="small-11 small-centered columns">
     <%= form_for @volunteer, url: {action: "create"} do |f| %>
+
+    <div class="row">
+      <div class="small-11 columns">
+        <div class="error_panel">
+        <% if @errors && @errors.any? %>
+          <div id="error_explanation" class="alert-box alert">
+            <h4>There are <%= pluralize(@errors.count, "error") %> that need to be fixed:</h4>
+
+            <ul>
+              <% @errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+
       <div class="row">
         <div class="large-4 columns">
           <label>Certifications</label>
-          <%= f.select(:certifications, [["CPR"], ["First-Aid"], ["Outdoor Rescue"], ["Wilderness First Responder"]], {}, {multiple: 'true', size: 4}) %>
+          <% certifications = ["CPR", "First-Aid", "Outdoor Rescue", "Wilderness First Responder"] %>
+          <ul>
+          <% certifications.each do |c| %>
+            <li><%= check_box_tag("volunteer[certifications][]", c) %> <%= c %></li>
+          <% end %>
+            <li>Other: <%= text_field("volunteer[certifications_other]", nil) %></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row inputs">
+        <div class="large-4 columns">
+          <label>What Equipment Can You Bring?</label>
+          <% equipment = ["Lantern", "Walkie-Talkie"] %>
+          <ul>
+            <% equipment.each do |eq| %>
+            <li><%= check_box_tag("volunteer[equipment][]", eq) %> <%= eq %></li>
+            <% end %>
+          </ul>
         </div>
       </div>
 
       <div class="row inputs">
         <div class="large-4 columns">
           <label>Year(s) Volunteered</label>
-          <%= f.select(:years_volunteered, [["First Time"],["2007"], ["2008"], ["2009"], ["2010"], ["2011"], ["2012"]], {}, {multiple: 'true', size: 7}) %>
+          <% years = ["First Time","2007", "2008", "2009", "2010", "2011", "2012"] %>
+          <ul>
+          <% years.each do |y| %>
+            <li><%= check_box_tag("volunteer[years_volunteered][]", y, params[:volunteer][:years_volunteered].include?(y)) %> <%= y %></li>
+          <% end %>
+          </ul>
         </div>
       </div>
+
+      <%= fields_for @volunteer_app do |va| %>
+
+      <div class="row inputs">
+        <div class="small-6 columns">
+          <label>Which Events Are You Available For?</label>
+          <ul>
+            <li><%= check_box_tag("vol_application[event_availability][]", "Setup") %> Setup</li>
+            <li><%= check_box_tag("vol_application[event_availability][]", "12hr Competition") %> 12hr Competition</li>
+            <li><%= check_box_tag("vol_application[event_availability][]", "24hr Competition") %> 24hr Competition</li>
+            <li><%= check_box_tag("vol_application[event_availability][]", "Tear down") %> Tare down</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row inputs">
+        <div class="small-5 columns">
+          <label>Which Areas Would You Like To Volunteer For?</label>
+          <% teams = ["Crag Team", "Registrations", "Scoring", "Logistics", "Medical"] %>
+          <ul>
+          <% teams.each do |t| %>
+            <li><%= check_box_tag("vol_application[preferred_teams][]", t) %> <%= t %></li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="small-5 columns">
+          <label>Any preferred teammates?</label>
+          <%= va.text_field(:preferred_teammates, placeholder: "John Crux, Jane Clean") %>
+        </div>
+      </div>
+      <% end %>
 
       <div class="row inputs">
         <div class="large-10 columns">
@@ -31,28 +105,12 @@
         </div>
       </div>
 
-      <%= fields_for @volunteer_app do |va| %>
-      <div class="row">
-        <div class="small-5 columns">
-          <label>Any preferred teammates?</label>
-          <%= va.text_field(:preferred_teammates, placeholder: "John Crux, Jane Clean") %>
-        </div>
-      </div>
-
       <div class="row inputs">
-        <div class="small-6 columns">
-          <label>Which Events Are You Available For?</label>
-          <%= va.select(:event_availability, [["Setup"], ["12hr Competition"], ["24hr Competition"], ["Tardown"]], {}, {multiple: 'true', size: 4}) %>
+        <div class="small-11 columns">
+          <p>Just to be clear, by submitting this application, you agree to a couple of things. The first is an important one. By submitting your application, you're saying that <span style="text-decoration: underline">the choices you selected and the information you provided is true.</span> If it's not, we'll find out. Trust us, we have our ways. Second, you agree that this is just an application. <span style="text-decoration: underline">Submitting an application for review doesn't mean you will automatically get selected as a volunteer.</span> We have a very limited number of spots each year and we select volunteers based on experience, skills and availability. Our number one goal is to create a team that will host a great 24HHH event. If you don't get in this year, don't worry. Attend as a guest. You'll be able to enjoy all of the fun, without any of the work of competing or volunteering! If you get it and agree, click below and proceed!</p>
+          <p><%= check_box_tag("agreed") %> Do You Agree?</p>
         </div>
       </div>
-
-      <div class="row inputs">
-        <div class="small-5 columns">
-          <label>Which Areas Would You Like To Volunteer For?</label>
-          <%= va.select(:preferred_teams, [["Crag Team"], ["Registrations"], ["Scoring"], ["Logistics"], ["Medical"]]) %>
-        </div>
-      </div>
-      <% end %>
 
       <div class="row inputs">
         <div class="small-4 columns">

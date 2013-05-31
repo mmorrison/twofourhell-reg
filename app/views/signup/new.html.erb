@@ -1,28 +1,31 @@
 <div class="row">
-  <div class="large-6 columns">
-    <h2>Create Profile</h2>
-  </div>
-</div>
-
-<div class="row">
-  <div class="error_panel">
-    <% if @profile.errors.any? %>
-      <div id="error_explanation">
-        <h4><%= pluralize(@profile.errors.count, "error") %> prohibited this post from being saved:</h4>
-
-        <ul>
-        <% @profile.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
+  <div class="large-11 large-centered columns">
+    <h2>Create Your Profile</h2>
   </div>
 </div>
 
 <div class="row">
   <div class="small-11 small-centered columns">
     <%= form_for @profile, url: {action: "create"} do |f| %>
+
+    <div class="row">
+      <div class="small-11 columns">
+        <div class="error_panel">
+        <% if @profile.errors.any? %>
+          <div id="error_explanation" class="alert-box alert">
+            <h4>There are <%= pluralize(@profile.errors.count, "error") %> that need to be fixed:</h4>
+
+            <ul>
+              <% @profile.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+
       <div class="row">
         <div class="large-4 columns">
           <label>Name</label>
@@ -47,7 +50,7 @@
       <div class="row">
         <div class="large-4 columns">
           <label>T-shirt Size</label>
-          <%= select_tag(:tshirt_size, options_for_select([["Small", "S"], ["Medium", "M"], ["Large", "L"], ["X-Large", "XL"], ["2X-Large", "2XL"], ["3X-Large", "3XL"]])) %>
+          <%= f.select(:tshirt_size, options_for_select([["Small", "S"], ["Medium", "M"], ["Large", "L"], ["X-Large", "XL"], ["2X-Large", "2XL"], ["3X-Large", "3XL"]])) %>
 
         </div>
       </div>
@@ -55,7 +58,7 @@
       <div class="row inputs">
         <div class="large-4 columns">
           <label>Age Group</label>
-          <%= select_tag(:age_group, options_for_select([["Under 18", 1], ["18-20", 2], ["21 and Over", 3]])) %>
+          <%= f.select(:age_group, options_for_select([["Under 18", 1], ["18-20", 2], ["21 and Over", 3]])) %>
         </div>
       </div>
 

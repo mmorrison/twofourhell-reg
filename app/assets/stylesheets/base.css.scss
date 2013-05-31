@@ -1,14 +1,9 @@
-html {
- 	#background: image-url("24HHH1.jpg") no-repeat center center fixed;
- 	#background-size: cover;
-}
-
 textarea {
   height: auto !important;
 }
 
 .error_panel {
-
+  padding-bottom: 10px;
 }
 
 .header {
@@ -24,3 +19,9 @@ textarea {
 .inputs {
   padding-top: 20px;
 }
+
+.alert-box {
+  text-align: center;
+}
+
+ul li { list-style: none; }

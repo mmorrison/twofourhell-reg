@@ -6,7 +6,7 @@ TwofourhellVolReg::Application.routes.draw do
   get "confirm/:ct" => 'signup#confirm'
 
   #testing
-  get "faker" => 'signup#faker'
+  get "faker/:id" => 'signup#faker'
 
   get "volunteers/thankyou", as: 'thankyou'
 

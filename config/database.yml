@@ -19,7 +19,7 @@ development:
   encoding: unicode
   database: twofourhell-vol-reg_development
   pool: 5
-  port: 15432
+  port: 5432
   host: localhost
 
   # Connect on a TCP socket. Omitted by default since the client uses a

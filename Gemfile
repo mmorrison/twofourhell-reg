@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 ruby "1.9.3"
 
-gem 'rails',     github: 'rails/rails'
-gem 'arel',      github: 'rails/arel'
+gem 'rails', '4.0.0.rc1'
+gem 'arel', '4.0.0'
 gem 'activerecord-deprecated_finders', github: 'rails/activerecord-deprecated_finders'
 
 gem 'pg'
@@ -11,13 +11,13 @@ gem 'pg'
 gem 'sprockets-rails', github: 'rails/sprockets-rails'
 
 # Use SCSS for stylesheets
-gem 'sass-rails',   github: 'rails/sass-rails'
+gem 'sass-rails', '~> 4.0.0.rc1'
 
 # To use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '~> 1.3'
+gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', github: 'rails/coffee-rails'
+gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

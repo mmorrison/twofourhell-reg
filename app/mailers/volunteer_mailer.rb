@@ -1,9 +1,9 @@
 class VolunteerMailer < ActionMailer::Base
-  default from: "24hhhvolunteer@gmail.com"
+  default from: "volunteer.24hhh@gmail.com"
 
   def notify_organizer(volunteer)
     @volunteer = volunteer
-    mail(to: '24hhhvolunteer@gmail.com', subject: 'New Volunteer Application')
+    mail(to: 'volunteer.24hhh@gmail.com', subject: 'New Volunteer Application')
   end
 
 

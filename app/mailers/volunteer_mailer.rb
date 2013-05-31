@@ -6,5 +6,9 @@ class VolunteerMailer < ActionMailer::Base
     mail(to: 'volunteer.24hhh@gmail.com', subject: 'New Volunteer Application')
   end
 
+  def confirmation(volunteer)
+    mail(to: volunteer.profile.email, subject: '[24HHH] Volunteer Application Confirmation')
+  end
+
 
 end

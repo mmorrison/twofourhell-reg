@@ -31,6 +31,7 @@ class VolunteersController < ApplicationController
       @volunteer_app.volunteer_id = @volunteer.id
       if @volunteer_app.save
         VolunteerMailer.notify_organizer(@volunteer).deliver
+        VolunteerMailer.confirmation(@volunteer).deliver
         redirect_to thankyou_path and return
       else
         @errors = @volunteer_app.errors

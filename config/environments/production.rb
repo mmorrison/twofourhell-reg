@@ -84,4 +84,6 @@ TwofourhellVolReg::Application.configure do
     :username => ENV['MANDRILL_USERNAME'],
     :password => ENV['ad0kw9vJdJUY216JZhLMMQ']
   }
+
+  config.assets.initialize_on_precompile = false
 end

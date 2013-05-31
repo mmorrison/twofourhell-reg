@@ -6,6 +6,7 @@ class SignupController < ApplicationController
   def create
     # Open May 31
   	@profile = Profile.new(profile_params)
+    @profile.status = "unconfirmed"
 
   	if @profile.save
       session[:profile_id] = @profile.id
@@ -29,6 +30,8 @@ class SignupController < ApplicationController
 
     if @profile.present?
       session[:profile_id] = @profile.id
+      @profile.status = "confirmed"
+      @profile.save
       flash[:notice] = "Great! Your email address has been confirmed!"
       redirect_to new_volunteer_path
     else

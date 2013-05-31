@@ -1,64 +1,89 @@
 <div class="row">
-  <div class="small-11 small-centered columns vol-welcome ">
-    <p>Hey, <%= @profile.name %>!</p>
+  <div class="large-9 small-centered columns vol-welcome ">
+    <h2>Hey, <%= @profile.name %>!</h2>
     <p>We're excited that you want to volunteer for 24hell this year!.
       We just need a couple more pieces of information from you, and you'll be all set.</p>
-    <p>Just complete the form below, and hit apply. That's it!</p>
+    <p><strong>Just complete the form below, and hit apply. That's it!</strong></p>
   </div>
 </div>
 
 <div class="row">
-  <div class="small-11 small-centered columns">
+  <div class="large-9 small-centered small-12 columns">
     <%= form_for @volunteer, url: {action: "create"} do |f| %>
       <div class="row">
-        <div class="large-4 columns">
+        <div class="large-6 columns">
           <label>Certifications</label>
-          <%= f.select(:certifications, [["CPR"], ["First-Aid"], ["Outdoor Rescue"], ["Wilderness First Responder"]], {}, {multiple: 'true', size: 4}) %>
+<!--           <%= f.select(:certifications, [["CPR"], ["First-Aid"], ["Outdoor Rescue"], ["Wilderness First Responder"]], {}, {multiple: 'true', size: 4}) %> -->
+          <form>
+            <input type="checkbox" name="cpr" value="cpr">CPR<br>
+            <input type="checkbox" name="first_aid" value="first_aid">First Aid<br> 
+            <input type="checkbox" name="outdoor_rescue" value="outdoor_rescue">Outdoor Rescue<br>
+            <input type="checkbox" name="wfr" value="wfr">Wilderness First Responder<br>
+          </form>
         </div>
-      </div>
 
-      <div class="row inputs">
-        <div class="large-4 columns">
+        <div class="large-6 columns">
           <label>Year(s) Volunteered</label>
-          <%= f.select(:years_volunteered, [["First Time"],["2007"], ["2008"], ["2009"], ["2010"], ["2011"], ["2012"]], {}, {multiple: 'true', size: 7}) %>
+<!--           <%= f.select(:years_volunteered, [["First Time"],["2007"], ["2008"], ["2009"], ["2010"], ["2011"], ["2012"]], {}, {multiple: 'true', size: 7}) %> -->
+          <form>
+            <input type="checkbox" name="2007" value="2007">2007<br>
+            <input type="checkbox" name="2008" value="2008">2008<br> 
+            <input type="checkbox" name="2009" value="2009">2009<br>
+            <input type="checkbox" name="2010" value="2010">2010<br>
+            <input type="checkbox" name="2008" value="2011">2011<br> 
+            <input type="checkbox" name="2009" value="2012">2012<br>
+          </form>
         </div>
       </div>
 
-      <div class="row inputs">
-        <div class="large-10 columns">
+      <div class="row">
+        <div class="large-12 columns">
           <label>What Qualifies You To Be a Volunteer?</label>
           <%= f.text_area(:qualification, size: '80x10') %>
         </div>
-      </div>
 
       <%= fields_for @volunteer_app do |va| %>
-      <div class="row">
-        <div class="small-5 columns">
+      </div>
+
+      <div class="row inputs">
+        <div class="large-6 columns">
+          <label>Which Events Are You Available For?</label>
+<!--           <%= va.select(:event_availability, [["Setup"], ["12hr Competition"], ["24hr Competition"], ["Tardown"]], {}, {multiple: 'true', size: 4}) %> -->
+          <form>
+            <input type="checkbox" name="setup" value="setup">Setup<br>
+            <input type="checkbox" name="12hr" value="12hr">12hr competition<br> 
+            <input type="checkbox" name="24hr" value="24hr">24hr competition<br>
+            <input type="checkbox" name="takedown" value="takedown">Takedown<br>
+          </form>
+        </div>
+        <div class="large-6 columns">
+          <label>Which Areas Would You Like To Volunteer For?</label>
+<!--          <%= va.select(:preferred_teams, [["Crag Team"], ["Registrations"], ["Scoring"], ["Logistics"], ["Medical"]]) %> -->
+          <form>
+            <input type="checkbox" name="crag" value="crag">Crag Team<br>
+            <input type="checkbox" name="registration" value="registration">Registration<br> 
+            <input type="checkbox" name="scoring" value="scoring">Scoring<br>
+            <input type="checkbox" name="logistics" value="logistics">Logistics<br>
+          </form>
+        </div>
+      </div>
+
+      <div class="row inputs">
+        <div class="large-12 columns">
           <label>Any preferred teammates?</label>
           <%= va.text_field(:preferred_teammates, placeholder: "John Crux, Jane Clean") %>
         </div>
       </div>
 
-      <div class="row inputs">
-        <div class="small-6 columns">
-          <label>Which Events Are You Available For?</label>
-          <%= va.select(:event_availability, [["Setup"], ["12hr Competition"], ["24hr Competition"], ["Tardown"]], {}, {multiple: 'true', size: 4}) %>
-        </div>
-      </div>
-
-      <div class="row inputs">
-        <div class="small-5 columns">
-          <label>Which Areas Would You Like To Volunteer For?</label>
-          <%= va.select(:preferred_teams, [["Crag Team"], ["Registrations"], ["Scoring"], ["Logistics"], ["Medical"]]) %>
-        </div>
-      </div>
       <% end %>
 
       <div class="row inputs">
-        <div class="small-4 columns">
+        <div class="large-centered columns">
           <%= f.submit "Apply for #{DateTime.now.year}!", :class => "button" %>
         </div>
       </div>
     <% end %>
   </div>
 </div>
+
+<br><br><br>

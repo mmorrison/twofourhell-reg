@@ -83,6 +83,8 @@ TwofourhellVolReg::Application.configure do
     :address => "smtp.mandrillapp.com",
     :port => 587,
     :user_name => ENV['MANDRILL_USERNAME'],
-    :password => ENV['ad0kw9vJdJUY216JZhLMMQ']
+    :password => ENV['MANDRILL_APIKEY'],
+    :enable_starttls_auto => true,
+    :authentication => 'login'
   }
 end
